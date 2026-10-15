@@ -129,6 +129,7 @@ export const fr: Record<string, string> = {
   'act.balance.remove': 'Reprise de Go',
   'act.import': 'Import',
   'act.delete': 'Suppression',
+  'act.password.reset': 'Mot de passe réinitialisé',
   'act.key.set': 'Clé enregistrée',
   'act.key.remove': 'Clé retirée',
 

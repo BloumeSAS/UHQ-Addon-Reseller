@@ -68,6 +68,12 @@ export class ResellerController {
     return this.svc.detail(admin, id);
   }
 
+  @Get('lookup')
+  async lookup(@Req() req: Request) {
+    const admin = await this.panel.requireAdmin(req);
+    return this.svc.lookup(admin, String(req.query['host'] ?? ''), Number(req.query['port']), String(req.query['username'] ?? ''));
+  }
+
   @Post('proxies')
   async purchase(@Req() req: Request, @Body() body: unknown) {
     const admin = await this.panel.requireAdmin(req);
@@ -78,6 +84,12 @@ export class ResellerController {
   async balance(@Req() req: Request, @Param('id') id: string, @Body() body: unknown) {
     const admin = await this.panel.requireAdmin(req);
     return this.svc.balance(admin, id, body);
+  }
+
+  @Post('proxies/:id/password')
+  async resetPassword(@Req() req: Request, @Param('id') id: string, @Body() body: unknown) {
+    const admin = await this.panel.requireAdmin(req);
+    return this.svc.resetPassword(admin, id, body);
   }
 
   @Post('proxies/:id/import')

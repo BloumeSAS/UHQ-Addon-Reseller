@@ -99,6 +99,11 @@ export class PanelClient {
     if (!r?.imported) throw new HttpException(String(r?.message ?? 'import failed').slice(0, 300), 400);
   }
 
+  /** Retire du pool du panel un proxy précis (id du panel). */
+  async deleteById(admin: Admin, panelId: string): Promise<void> {
+    await this.request('DELETE', `/api/panel/monitoring/proxies/${encodeURIComponent(panelId)}`, admin.token, undefined, admin.lang);
+  }
+
   /**
    * Retire du panel le proxy importé (retrouvé par catégorie + hôte + port + identifiant). Sans catégorie, on ne
    * parcourt pas tout le pool partagé : retourne false et c'est à l'administrateur de le retirer dans « Pool ».

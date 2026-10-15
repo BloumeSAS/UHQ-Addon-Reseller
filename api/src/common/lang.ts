@@ -26,6 +26,7 @@ const MESSAGES = {
     fr: "Résultat incertain : UHQ.Monster n'a pas répondu clairement et aucun proxy portant ce libellé n'a été retrouvé. Vérifiez la liste « Mes proxies » et votre solde AVANT de réessayer.",
     en: 'Uncertain result: UHQ.Monster did not answer clearly and no proxy with this label was found. Check “My proxies” and your balance BEFORE retrying.',
   },
+  noReset: { fr: 'Ce produit ne permet pas de réinitialiser le mot de passe.', en: 'This product does not allow resetting the password.' },
   forbiddenKey: { fr: 'Clé de sauvegarde invalide', en: 'Invalid backup key' },
 } as const;
 

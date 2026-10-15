@@ -274,6 +274,84 @@ export class ResellerService {
     });
   }
 
+  // ── Depuis la page « Pool » du panel ───────────────────────────────────────
+  /** Retrouve, chez UHQ.Monster, le proxy correspondant à une ligne du pool (hôte + port + identifiant). */
+  async lookup(admin: Admin, host: string, port: number, username: string) {
+    if (!host || !Number.isInteger(port) || !username || host.length > 255 || username.length > 128) throw new BadRequestException(msg(admin.lang, 'badInput'));
+    const rows = await this.uhq.call<any[]>('GET', '/proxies', { lang: admin.lang });
+    const row = (rows ?? []).find((p) => p.host === host && Number(p.port) === port && p.username === username);
+    if (!row) throw new NotFoundException('Proxy not found');
+    const product = (await this.products(admin).catch(() => [] as Product[])).find((p) => p.id === row.productId);
+    return {
+      id: row.id,
+      label: row.label ?? null,
+      productId: row.productId,
+      productName: row.productName ?? product?.name ?? null,
+      status: row.status,
+      totalGb: Number(row.totalGb ?? 0),
+      usedGb: Number(row.usedGb ?? 0),
+      priceUnit: product?.priceUnit ?? 'GB',
+      minAmount: product?.minAmount ?? null,
+      maxAmount: product?.maxAmount ?? null,
+      capabilities: product?.capabilities ?? {},
+    };
+  }
+
+  /**
+   * Réinitialise le mot de passe chez UHQ.Monster (le nouveau est choisi par UHQ.Monster) puis met à jour le panel :
+   * l'ancienne ligne du pool est retirée et la nouvelle (nouveaux identifiants) importée dans la même catégorie.
+   */
+  async resetPassword(admin: Admin, id: string, body: any) {
+    const lang = admin.lang;
+    checkId(id, lang);
+    const panelId = typeof body?.panelProxyId === 'string' && ID_RE.test(body.panelProxyId) ? body.panelProxyId : null;
+    const bodyCategory = typeof body?.category === 'string' && body.category.trim() ? body.category.trim().slice(0, 64) : null;
+
+    return this.exclusive(admin, async () => {
+      const before = await this.uhq.call<any>('GET', `/proxies/${id}`, { lang });
+      const product = (await this.products(admin).catch(() => [] as Product[])).find((p) => p.id === before?.productId);
+      if (product && product.capabilities?.resetPassword === false) throw new BadRequestException(msg(lang, 'noReset'));
+
+      const r = await this.uhq.call<any>('PATCH', `/proxies/${id}`, { body: { password: true }, lang });
+      let c = before?.credentials;
+      let password = typeof r?.password === 'string' ? r.password : '';
+      if (!password || password === c?.password) {
+        const after = await this.uhq.call<any>('GET', `/proxies/${id}`, { lang });
+        c = after?.credentials ?? c;
+        password = c?.password ?? password;
+      }
+
+      const meta = this.store.meta(id);
+      const category = bodyCategory ?? meta?.category ?? null;
+      let imported = false;
+      let syncError: string | null = null;
+      try {
+        if (panelId) await this.panel.deleteById(admin, panelId);
+        else if (before?.credentials) await this.panel.removeProxy(admin, category, String(before.credentials.host), Number(before.credentials.port), String(before.credentials.username));
+        await this.panel.importProxy(admin, proxyUrl({ host: c.host, port: c.port, username: c.username, password }), category);
+        imported = true;
+      } catch (e) {
+        // Le mot de passe a DÉJÀ changé chez UHQ.Monster : on l'indique, l'import peut être relancé depuis « Mes proxies ».
+        syncError = String((e as Error)?.message ?? e).slice(0, 200);
+        this.logger.warn(`Mise à jour du panel après réinitialisation échouée (proxy ${id}) : ${syncError}`);
+      }
+      this.store.setMeta(id, {
+        label: before?.label ?? meta?.label ?? null,
+        productId: before?.productId ?? meta?.productId ?? null,
+        productName: before?.productName ?? meta?.productName ?? null,
+        host: String(c.host),
+        port: Number(c.port),
+        username: String(c.username),
+        category,
+        imported,
+        ...(syncError ? { importError: syncError } : {}),
+        createdAt: meta?.createdAt ?? new Date().toISOString(),
+      });
+      this.store.log({ by: admin.email, action: 'password.reset', proxyId: id, label: before?.label ?? null, detail: imported ? 'panel updated' : 'panel NOT updated' });
+      return { success: true, password, imported, syncError };
+    });
+  }
+
   // ── Panel ──────────────────────────────────────────────────────────────────
   /** Importe (ou ré-importe, ou change de catégorie) un proxy déjà acheté chez UHQ.Monster. */
   async importExisting(admin: Admin, id: string, body: any) {

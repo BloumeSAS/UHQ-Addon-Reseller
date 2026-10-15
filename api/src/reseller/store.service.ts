@@ -20,7 +20,7 @@ export interface ProxyMeta {
 export interface HistoryEntry {
   ts: string;
   by: string;
-  action: 'key.set' | 'key.remove' | 'purchase' | 'balance.add' | 'balance.remove' | 'import' | 'delete';
+  action: 'key.set' | 'key.remove' | 'purchase' | 'balance.add' | 'balance.remove' | 'import' | 'delete' | 'password.reset';
   proxyId?: string;
   label?: string | null;
   detail: string;

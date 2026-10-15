@@ -129,6 +129,7 @@ export const en: Record<string, string> = {
   'act.balance.remove': 'GB taken back',
   'act.import': 'Import',
   'act.delete': 'Deletion',
+  'act.password.reset': 'Password reset',
   'act.key.set': 'Key saved',
   'act.key.remove': 'Key removed',
 

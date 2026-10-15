@@ -19,6 +19,7 @@ const TONE: Record<string, 'good' | 'bad' | 'warn' | 'info' | 'muted'> = {
   'balance.remove': 'warn',
   import: 'info',
   delete: 'bad',
+  'password.reset': 'warn',
   'key.set': 'muted',
   'key.remove': 'muted',
 };
