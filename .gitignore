@@ -1,0 +1,16 @@
+# Dependencies
+node_modules/
+api/node_modules/
+web/node_modules/
+
+# Build outputs
+api/dist/
+web/dist/
+
+# Env config
+.env
+.env.local
+
+# OS files
+.DS_Store
+Thumbs.db

@@ -1,0 +1,51 @@
+{
+  "name": "UHQ.Monster Reseller",
+  "version": "1.0.0",
+  "description": "Achetez et gérez vos proxies UHQ.Monster directement depuis le panel : solde, création, ajout/retrait de Go, import automatique dans vos catégories.",
+  "icon": "ShoppingBag",
+  "author": {
+    "name": "Bloume SAS",
+    "email": "contact@bloume.fr",
+    "url": "https://bloume.fr"
+  },
+  "homepage": "https://uhq-panel-os-docs.bloume.fr/addons/official/reseller",
+  "repository": "https://github.com/BloumeSAS/UHQ-Addon-Reseller",
+  "license": "MIT",
+  "panelVersion": "2.4.91",
+  "translations": {
+    "fr": {
+      "addon.reseller.nav": "UHQ.Monster Reseller",
+      "addon.reseller.widget": "Acheter un proxy UHQ.Monster"
+    },
+    "en": {
+      "addon.reseller.nav": "UHQ.Monster Reseller",
+      "addon.reseller.widget": "Buy a UHQ.Monster proxy"
+    }
+  },
+  "pages": [
+    {
+      "path": "/",
+      "label": "addon.reseller.nav",
+      "icon": "ShoppingBag",
+      "showInNavbar": true,
+      "adminOnly": true
+    }
+  ],
+  "widgets": [
+    {
+      "zone": "/pool",
+      "path": "/widget/pool",
+      "height": 190,
+      "label": "addon.reseller.widget"
+    }
+  ],
+  "auth": {
+    "passJwt": true,
+    "passUserInfo": true
+  },
+  "backup": {
+    "exportEndpoint": "/api/backup/export",
+    "importEndpoint": "/api/backup/import",
+    "authHeader": "X-Panel-Key"
+  }
+}

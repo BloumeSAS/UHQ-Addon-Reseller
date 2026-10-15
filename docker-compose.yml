@@ -1,0 +1,23 @@
+services:
+  reseller:
+    build: .
+    container_name: uhq-addon-reseller
+    restart: unless-stopped
+    ports:
+      - "3001:3001"
+    environment:
+      PORT:          3001
+      PANEL_URL:     http://host.docker.internal:8000
+      PANEL_API_KEY: ${PANEL_API_KEY:-}
+      DB_PATH:       /app/data/reseller-data.json
+      NODE_ENV:      production
+    volumes:
+      - reseller-data:/app/data
+    healthcheck:
+      test: ["CMD", "wget", "-qO-", "http://localhost:3001/uhq-manifest.json"]
+      interval: 30s
+      timeout:  5s
+      retries:  3
+
+volumes:
+  reseller-data:
