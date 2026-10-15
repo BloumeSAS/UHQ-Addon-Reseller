@@ -1,6 +1,6 @@
 {
   "name": "UHQ.Monster Reseller",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Achetez et gérez vos proxies UHQ.Monster directement depuis le panel : solde, création, ajout/retrait de Go, import automatique dans vos catégories.",
   "icon": "ShoppingBag",
   "author": {
@@ -35,7 +35,7 @@
     {
       "zone": "/pool",
       "path": "/widget/pool",
-      "height": 190,
+      "height": 240,
       "label": "addon.reseller.widget"
     }
   ],

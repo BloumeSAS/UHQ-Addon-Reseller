@@ -1,6 +1,6 @@
 /**
  * Widget de la page « Pool de proxies » du panel : achat rapide d'un proxy UHQ.Monster, importé directement
- * dans une catégorie. Manifeste : { "zone": "/pool", "path": "/widget/pool", "height": 190 }
+ * dans une catégorie. Manifeste : { "zone": "/pool", "path": "/widget/pool", "height": 240 }
  */
 import { useAddon } from '../context';
 import { useT } from '../i18n';
