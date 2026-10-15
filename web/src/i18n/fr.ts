@@ -132,16 +132,10 @@ export const fr: Record<string, string> = {
   'act.key.set': 'Clé enregistrée',
   'act.key.remove': 'Clé retirée',
 
-  'set.needKey': 'Configurez votre clé API revendeur UHQ.Monster pour commencer.',
+  'set.needKey': "Configurez votre clé API revendeur dans Paramètres → Extensions du panel pour commencer.",
+  'set.moved': "La clé API se saisit dans le panel : Paramètres → Extensions → UHQ.Monster Reseller.",
   'set.keyTitle': 'Clé API revendeur',
   'set.current': 'Clé enregistrée :',
-  'set.key': 'Clé API',
-  'set.replace': 'Remplacer la clé',
-  'set.keyHint': 'Commence par « uhq_ ». Elle est vérifiée auprès d’UHQ.Monster avant d’être enregistrée.',
-  'set.save': 'Vérifier et enregistrer',
-  'set.remove': 'Retirer la clé',
-  'set.removeConfirm': 'Retirer la clé API ? L’addon ne pourra plus acheter ni lire votre solde.',
-  'set.saved': 'Clé enregistrée — compte {email}, solde {balance}.',
   'set.howTitle': 'Où trouver ma clé ?',
   'set.how1': 'Soyez approuvé comme revendeur sur uhq.monster.',
   'set.how2': 'Dans votre dashboard : Revendeur → API, générez votre clé.',
@@ -149,5 +143,5 @@ export const fr: Record<string, string> = {
   'set.security': 'La clé est conservée sur le serveur du panel (jamais envoyée à votre navigateur ni incluse dans les sauvegardes) et seuls les administrateurs peuvent l’utiliser. Quiconque la possède peut dépenser votre solde.',
 
   'widget.title': 'Acheter un proxy UHQ.Monster',
-  'widget.notConfigured': 'Configurez votre clé API dans Extensions → UHQ.Monster Reseller → Paramètres.',
+  'widget.notConfigured': "Configurez votre clé API dans Paramètres → Extensions du panel.",
 };

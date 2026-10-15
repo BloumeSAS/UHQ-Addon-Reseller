@@ -132,16 +132,10 @@ export const en: Record<string, string> = {
   'act.key.set': 'Key saved',
   'act.key.remove': 'Key removed',
 
-  'set.needKey': 'Configure your UHQ.Monster reseller API key to get started.',
+  'set.needKey': "Configure your reseller API key in the panel's Settings → Extensions to get started.",
+  'set.moved': "The API key is entered in the panel: Settings → Extensions → UHQ.Monster Reseller.",
   'set.keyTitle': 'Reseller API key',
   'set.current': 'Saved key:',
-  'set.key': 'API key',
-  'set.replace': 'Replace the key',
-  'set.keyHint': 'Starts with “uhq_”. It is checked with UHQ.Monster before being saved.',
-  'set.save': 'Check and save',
-  'set.remove': 'Remove the key',
-  'set.removeConfirm': 'Remove the API key? The addon will no longer be able to buy or read your balance.',
-  'set.saved': 'Key saved — account {email}, balance {balance}.',
   'set.howTitle': 'Where do I find my key?',
   'set.how1': 'Get approved as a reseller on uhq.monster.',
   'set.how2': 'In your dashboard: Reseller → API, generate your key.',
@@ -149,5 +143,5 @@ export const en: Record<string, string> = {
   'set.security': 'The key is kept on the panel server (never sent to your browser nor included in backups) and only administrators can use it. Anyone holding it can spend your balance.',
 
   'widget.title': 'Buy a UHQ.Monster proxy',
-  'widget.notConfigured': 'Configure your API key in Extensions → UHQ.Monster Reseller → Settings.',
+  'widget.notConfigured': "Configure your API key in the panel's Settings → Extensions.",
 };
