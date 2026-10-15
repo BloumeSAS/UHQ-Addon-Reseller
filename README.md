@@ -85,3 +85,4 @@ Cet addon **dépense de l'argent** (votre solde UHQ.Monster) : il est durci en c
 ---
 
 Licence MIT — © Bloume SAS
+

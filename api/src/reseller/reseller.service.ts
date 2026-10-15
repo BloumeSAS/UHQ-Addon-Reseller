@@ -6,7 +6,8 @@ import { ProxyMeta, StoreService } from './store.service';
 import { UhqClient, UhqError } from './uhq-client.service';
 
 const ID_RE = /^[A-Za-z0-9_-]{5,64}$/;
-const KEY_RE = /^uhq_[A-Za-z0-9]{16,128}$/;
+/** Clés revendeur : préfixe `uhq_` ou `UHQ-` (casse indifférente), puis des caractères alphanumériques (tiret/underscore tolérés). */
+const KEY_RE = /^uhq[_-][A-Za-z0-9_-]{16,160}$/i;
 
 export interface Product {
   id: string;

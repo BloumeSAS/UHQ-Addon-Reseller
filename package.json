@@ -1,6 +1,6 @@
 {
   "name": "uhq-addon-reseller",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "description": "Addon UHQ.Monster Reseller pour UHQ Panel OS — NestJS + React",
   "private": true,
   "scripts": {

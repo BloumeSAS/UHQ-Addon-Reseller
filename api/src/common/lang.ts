@@ -14,7 +14,7 @@ const MESSAGES = {
   adminOnly: { fr: 'Réservé aux administrateurs', en: 'Administrators only' },
   panelDown: { fr: 'Panel injoignable', en: 'Panel unreachable' },
   notConfigured: { fr: "Clé API revendeur non configurée (onglet « Paramètres »).", en: 'Reseller API key not configured (“Settings” tab).' },
-  keyFormat: { fr: 'Format de clé invalide : elle ressemble à « uhq_ » suivi de caractères.', en: 'Invalid key format: it looks like “uhq_” followed by characters.' },
+  keyFormat: { fr: 'Format de clé invalide : elle commence par « uhq_ » ou « UHQ- » suivi de caractères.', en: 'Invalid key format: it starts with “uhq_” or “UHQ-” followed by characters.' },
   keyRejected: { fr: "Clé refusée par UHQ.Monster (invalide, révoquée ou compte revendeur non approuvé).", en: 'Key rejected by UHQ.Monster (invalid, revoked or reseller account not approved).' },
   upstreamDown: { fr: 'UHQ.Monster est injoignable ou a répondu trop lentement.', en: 'UHQ.Monster is unreachable or answered too slowly.' },
   busy: { fr: "Une opération d'achat est déjà en cours. Réessayez dans un instant.", en: 'A purchase operation is already running. Retry in a moment.' },
